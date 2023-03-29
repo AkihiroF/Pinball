@@ -22,6 +22,8 @@ namespace _Source.Core
         {
             _input.Player.Enable();
             _input.Player.PullBall.performed += _inputHandler.InputBall;
+            _input.Player.PullLeftFlipper.performed += _inputHandler.InputLeftFlipper;
+            _input.Player.PullRightFlipper.performed += _inputHandler.InputReghtFlipper;
         }
 
         private void UnBind()
