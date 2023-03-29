@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace _Source.Input
@@ -12,7 +13,7 @@ namespace _Source.Input
         }
         public void InputBall(InputAction.CallbackContext obj)
         {
-            _ballPuller.Pull();
+            Debug.Log(obj.action.);
         }
     }
 }
