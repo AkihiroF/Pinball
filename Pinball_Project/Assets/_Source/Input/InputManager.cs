@@ -53,6 +53,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""44494853-3e39-4b87-9235-f97629926fbf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -99,6 +108,17 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""PullLeftFlipper"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d8b56d4-e17f-4a2d-a537-16c45921bb93"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -110,6 +130,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_PullBall = m_Player.FindAction("PullBall", throwIfNotFound: true);
         m_Player_PullRightFlipper = m_Player.FindAction("PullRightFlipper", throwIfNotFound: true);
         m_Player_PullLeftFlipper = m_Player.FindAction("PullLeftFlipper", throwIfNotFound: true);
+        m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,6 +195,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PullBall;
     private readonly InputAction m_Player_PullRightFlipper;
     private readonly InputAction m_Player_PullLeftFlipper;
+    private readonly InputAction m_Player_Restart;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -181,6 +203,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @PullBall => m_Wrapper.m_Player_PullBall;
         public InputAction @PullRightFlipper => m_Wrapper.m_Player_PullRightFlipper;
         public InputAction @PullLeftFlipper => m_Wrapper.m_Player_PullLeftFlipper;
+        public InputAction @Restart => m_Wrapper.m_Player_Restart;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -199,6 +222,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @PullLeftFlipper.started += instance.OnPullLeftFlipper;
             @PullLeftFlipper.performed += instance.OnPullLeftFlipper;
             @PullLeftFlipper.canceled += instance.OnPullLeftFlipper;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -212,6 +238,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @PullLeftFlipper.started -= instance.OnPullLeftFlipper;
             @PullLeftFlipper.performed -= instance.OnPullLeftFlipper;
             @PullLeftFlipper.canceled -= instance.OnPullLeftFlipper;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -234,5 +263,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnPullBall(InputAction.CallbackContext context);
         void OnPullRightFlipper(InputAction.CallbackContext context);
         void OnPullLeftFlipper(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

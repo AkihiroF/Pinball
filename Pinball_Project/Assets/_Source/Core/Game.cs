@@ -1,4 +1,5 @@
 using _Source.Input;
+using UnityEngine.InputSystem;
 
 namespace _Source.Core
 {
@@ -24,7 +25,14 @@ namespace _Source.Core
             _input.Player.PullBall.performed += _inputHandler.InputBall;
             _input.Player.PullLeftFlipper.performed += _inputHandler.InputLeftFlipper;
             _input.Player.PullRightFlipper.performed += _inputHandler.InputReghtFlipper;
+            _input.Player.Restart.performed += Restart;
         }
+
+        private void Restart(InputAction.CallbackContext obj)
+        {
+            EventSystem.InvokeRestart();
+        }
+
 
         private void UnBind()
         {
